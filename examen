@@ -1,0 +1,101 @@
+
+trabajadores = ["Juan Pérez","María García","Carlos López","Ana Martínez","Pedro Rodríguez","Laura Hernández","Miguel Sánchez","Isabel Gómez","Francisco Díaz","Elena Fernández"] 
+sueldos=[]
+#texto
+def guardar():
+    if not sueldos:
+        print("Nada que guardar.")
+        return
+    try:
+        archivo_nombre ="C:\\Users\\PV-Alumno\\Desktop\\examen\\sueldoregistro.csv"
+        with open(archivo_nombre, "a") as archivo:
+            archivo.write("Nombre,Sueldo\n") 
+            for i in range(len(trabajadores)):
+                #archivo.write(f"{trabajadores[i]},{sueldos[i]}\n")
+                archivo.write(trabajadores)
+                archivo.write(sueldos)
+        print(f"Archivo '{archivo_nombre}' guardado con éxito.")
+    except ValueError:
+        print("Error ")
+
+#op1
+def generar_sueldos():
+    import random as r 
+    global sueldos
+    for i in range (10):
+        num=r.randint(300000,2500000)
+        sueldos.append(num)
+    for i in range(len(sueldos)):
+         print(f"{i+1}) nombre:{trabajadores [i]} sueldo: {sueldos [i]}")
+    trabajadores.append(sueldos)
+
+
+def clasificar():
+    menores = []
+    medios = []
+    altos = []
+
+    for i in range(len(sueldos)):
+        empleado = {"nombre": trabajadores[i], "sueldo": sueldos[i]}
+        if sueldos[i] < 800000:
+            menores.append(empleado)
+        elif 800000 <= sueldos[i] <= 2000000:
+            medios.append(empleado)
+        else:
+            altos.append(empleado)
+    print("\n--- Clasificación de Sueldos ---")
+    print(f"\nSueldos menores a $800.000 (Total: {len(menores)})")
+    for e in menores: print(f"Nombre: {e['nombre']} - ${e['sueldo']}")
+
+    print(f"\nSueldos entre $800.000 y $2.000.000 (Total: {len(medios)})")
+    for e in medios: print(f"Nombre: {e['nombre']} - ${e['sueldo']}")
+
+    print(f"\nSueldos superiores a $2.000.000 (Total: {len(altos)})")
+    for e in altos: print(f"Nombre: {e['nombre']} ${e['sueldo']}")
+
+
+#op3
+def ver_estadicticas():
+    global sueldos
+    print(f"El sueldo mas alto es {max(sueldos)}")
+    print(f"El sueldo mas bajo es {min(sueldos)}")
+    print(f"Promedio de sueldos: ${sum(sueldos) / len(sueldos)}")
+
+
+
+
+
+#menu
+while True: 
+    try:
+        print("---"*30)
+        print("bienvenido")
+        print("---"*30)
+        print("1. Asignar sueldos aleatorios \n2. Clasificar sueldos \n3. Ver estadísticas. \n4. Reporte de sueldos \n5. Salir del programa ")
+        opcion=int(input("selecione cual opcion desea ingresar: "))
+        match opcion:
+            case 1:
+                generar_sueldos()
+
+            case 2 :
+                clasificar()
+             
+            case 3 :
+               
+                ver_estadicticas()
+
+            case 4 :
+                guardar()
+                print("usted a guardado ") 
+
+            case 5 :
+                print("usted a salido del programa...")
+                print("desarollado por cristofer Gutierrez")
+                print("21.739.501-1")
+                break
+           
+            case _:
+                print("selecione una opcion valida (1-5)")
+    except ValueError:
+         print("ohhh no hubo un error")       
+
